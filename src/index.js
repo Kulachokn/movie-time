@@ -11,16 +11,16 @@ let lastPage;
 
 const apiService = new ApiService();
 
-const changeSomeDataArr = results => {
+export const changeSomeDataArr = results => {
   results.forEach(el => {
-    // el.genre_ids.forEach((genre, ind, arr) => {
-    //   for (let i = 0; i < genres.length; i += 1) {
-    //     if (genre === genres[i].id) {
-    //       arr[ind] = genres[i].name;
-    //       break;
-    //     }
-    //   }
-    // });
+    el.genre_ids.forEach((genre, ind, arr) => {
+      for (let i = 0; i < genres.length; i += 1) {
+        if (genre === genres[i].id) {
+          arr[ind] = genres[i].name;
+          break;
+        }
+      }
+    });
 
     if (el.genre_ids.length) {
       el.genre_ids = el.genre_ids.join(', ');

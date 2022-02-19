@@ -1,15 +1,17 @@
 {{#each this}}
-  <li>
+  <li class="movie-card" data-card="{{id}}">
     <div>
       <div>
-        <img src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2{{poster_path}}" alt="{{original_title}}" width="274" height="398">
+<!--        <img class="movie-img" data-card="{{id}}" src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2{{poster_path}}" alt="{{original_title}}" width="274" height="398">-->
+        <img class="movie-img" src="https://image.tmdb.org/t/p/w500{{poster_path}}" alt="{{original_title}}" width="274" height="398">
+<!--        <img class="movie-img" data-card="{{id}}" src="{{poster_path}}" alt="{{original_title}}" width="274" height="398">-->
       </div>
       <div>
-        <h2>{{title}}</h2>
+        <h2 class="movie-title">{{title}}</h2>
         <p class="card-genre-date">
           {{genre_ids}} | {{release_date}}
         </p>
-        <p>{{popularity}}</p>
+<!--        <p>{{popularity}}</p>-->
       </div>
     </div>
   </li>

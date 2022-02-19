@@ -53,6 +53,7 @@ export default class ApiService {
       baseURL: BASE_URL,
     }).then(response => {
       this.resetFilmId();
+      // console.log(response.data)
       return response.data;
     });
     return fetch;
