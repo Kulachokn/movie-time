@@ -1,29 +1,24 @@
-{{#with this}}
-  <button type="button" class="modal-close-btn" data-close>
-    <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M8 8L22 22" stroke="black" stroke-width="2" />
-      <path d="M8 22L22 8" stroke="black" stroke-width="2" />
-    </svg>
-  </button>
-    <div>
-      <div>
+<div>
   {{#if poster_path}}
-      <img class="movie-img" src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2{{poster_path}}" alt="{{original_title}}">
+    <img class="movie__img" src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2{{poster_path}}"
+         alt="{{original_title}}">
   {{/if}}
-    </div>
-      <div>
-        <h1 class="modal-title">{{title}}</h1>
-        <p class="movie-vote">Vote / Votes <span>{{vote_average}}</span><span>{{vote_count}}</span></p>
-        <p class="movie-popularity">Popularity <span>{{popularity}}</span></p>
-        <p class="movie-title">Original Title <span>{{original_title}}</span></p>
-        <p class="movie-genre">Genre</p>
-        <h2>About</h2>
-        <p class="movie-description">{{overview}}</p>
-        <div>
-          <button type="button" class="js-watched">add to Watched</button>
-          <button type="button" class="js-queue">add to queue</button>
-        </div>
-        <p id="js-id" data-card="{{id}}" class="is-hidden">{{id}}</p>
-      </div>
-    </div>
-{{/with}}
+</div>
+<div class="movie__details">
+  <h1 class="movie__name">{{title}}</h1>
+  <ul>
+    <li class="movie__details-item movie-vote">
+      <span class="movie__details-name">Vote / Votes</span><span><span>{{vote_average}}</span><span>{{vote_count}}</span></span></li>
+    <li class="movie__details-item movie-popularity"><span class="movie__details-name">Popularity </span><span>{{popularity}}</span></li>
+    <li class="movie__details-item movie-title"><span class="movie__details-name">Original Title </span><span>{{original_title}}</span></li>
+    <li class="movie__details-item movie-genre"><span class="movie__details-name">Genre </span></li>
+  </ul>
+  <h2 class="movie__review-title">About</h2>
+  <p class="movie__review movie-description">{{overview}}</p>
+  <div class="movie__btn-wrapper">
+    <button type="button" class="movie__btn-watched js-watched">add to Watched</button>
+    <button type="button" class="movie__btn-queue js-queue">add to queue</button>
+  </div>
+  <p id="js-id" data-card="{{id}}" class="is-hidden">{{id}}</p>
+</div>
+</div>

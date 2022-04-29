@@ -5,6 +5,8 @@ const apiService = new ApiService();
 
 const gallery = document.querySelector('.gallery');
 const modal = document.querySelector('#modal');
+const backdrop = document.querySelector('.backdrop');
+const bntClose = document.querySelector('.modal__close');
 const WATCHED = 'watched';
 const QUEUE = 'queue';
 
@@ -23,9 +25,9 @@ function getRootNode(node) {
   return getRootNode(node.parentNode);
 }
 
-function openModal(event) {
-  // debugger;
+export function openModal(event) {
   const cardNode = getRootNode(event.target);
+  backdrop.classList.toggle('is-hidden');
   if (cardNode !== null) {
     const id = cardNode.dataset['card'];
 
@@ -34,8 +36,9 @@ function openModal(event) {
       filmTemplate(data);
 
       const btnWatch = document.querySelector('.js-watched');
+      console.log(btnWatch)
       const btnQueue = document.querySelector('.js-queue');
-
+      console.log(btnQueue)
       const getWatchedArr = JSON.parse(localStorage.getItem(WATCHED));
 
       const checkMovie = getWatchedArr && getWatchedArr.find(el => el.id === id);
@@ -48,13 +51,41 @@ function openModal(event) {
       }
 
       btnQueue.addEventListener('click', btnQueueHandler);
+      btnWatch.addEventListener('click', btnWatchHandler);
+      //====Escape===
+      window.addEventListener('keydown', closeModalByEsc);
+      //====на кнопку===
+      bntClose.addEventListener('click', modalClose);
+      //====на backdrop===
+      backdrop.addEventListener('click', onBackdropClick);
     })
   }
 }
 
+function modalClose() {
+  backdrop.classList.toggle('is-hidden');
+  window.removeEventListener('keydown', closeModalByEsc);
+  bntClose.removeEventListener('click', onBackdropClick);
+  backdrop.removeEventListener('click', onBackdropClick);
+}
+
+function closeModalByEsc(event) {
+  if (event.code === 'Escape') {
+    modalClose();
+  }
+}
+
+function onBackdropClick(event) {
+  if (event.target === event.currentTarget) {
+    modalClose();
+  }
+}
+
+
 const idModal = () => document.querySelector('#modal');
-const imgModal = () => document.querySelector('#modal .movie-img');
-const titleModal = () => document.querySelector('#modal .modal-title');
+const filmId = () => document.querySelector('#js-id');
+const imgModal = () => document.querySelector('#modal .movie__img');
+const titleModal = () => document.querySelector('#modal .movie__name');
 const voteModal = () => document.querySelector('#modal .movie-vote');
 const originTitleModal = () => document.querySelector('#modal .movie-title');
 const genreModal = () => document.querySelector('#modal .movie-genre');
@@ -62,13 +93,13 @@ const descriptionModal = () => document.querySelector('#modal .movie-description
 
 
 function btnWatchHandler() {
+  console.log('click');
   let watchedArr = [];
-// debugger;
+
   let modalUrlImage = imgModal().currentSrc;
-  console.log(modalUrlImage);
 
   const movieObj = {
-    id: idModal().dataset.card,
+    id: filmId().dataset.card,
     urlImage: modalUrlImage,
     title: titleModal().textContent,
     rating: voteModal().textContent,
@@ -118,7 +149,7 @@ function btnQueueHandler() {
   let modalUrlImage = imgModal().currentSrc;
 
   const movieObj = {
-    id: idModal().dataset.card,
+    id: filmId().dataset.card,
     urlImage: modalUrlImage,
     title: titleModal().textContent,
     rating: voteModal().textContent,

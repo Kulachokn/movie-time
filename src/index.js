@@ -30,6 +30,8 @@ export const changeSomeDataArr = results => {
 
     if (el.poster_path) {
       el.poster_path = BASE_IMG_URL + el.poster_path;
+    } else {
+      el.poster_path = 'https://images.pexels.com/photos/4271927/pexels-photo-4271927.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260';
     }
 
     if (el.release_date) {
